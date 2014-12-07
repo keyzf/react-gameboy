@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>react-gameboy</title>
+</head>
+<body>
+  <script src="http://fb.me/react-with-addons-0.12.1.js"></script>
+  <script src="http://fb.me/JSXTransformer-0.12.1.js"></script>
+  <script src="../dist/react-gameboy.js"></script>
+  <script type="text/jsx">
+    var App = React.createClass({
+      render: function () {
+        return (
+          <Gameboy romData='' opts={null}/>
+        );
+      }
+    });
+
+    React.render(<App/>, document.body);
+  </script>
+</body>
+</html>

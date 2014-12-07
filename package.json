@@ -1,0 +1,49 @@
+{
+  "name": "react-gameboy",
+  "version": "0.0.0",
+  "description": "React component for playing gameboy roms",
+  "main": "lib/react-gameboy.js",
+  "scripts": {
+    "test": "script/test --browsers Firefox --single-run",
+    "start": "script/build"
+  },
+  "browserify": {
+    "transform": [
+      "reactify"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cezary/react-gameboy.git"
+  },
+  "keywords": [
+    "emulator",
+    "gameboy",
+    "react",
+    "react-component"
+  ],
+  "author": "Cezary Wojtkowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cezary/react-gameboy/issues"
+  },
+  "homepage": "https://github.com/cezary/react-gameboy",
+  "dependencies": {
+    "gameboy": "git+ssh://git@github.com:cezary/gameboy.git",
+    "react": "^0.12.1"
+  },
+  "devDependencies": {
+    "jsx-loader": "^0.12.2",
+    "karma": "^0.12.19",
+    "karma-cli": "0.0.4",
+    "karma-jasmine": "^0.1.5",
+    "karma-chrome-launcher": "^0.1.4",
+    "karma-firefox-launcher": "^0.1.3",
+    "karma-webpack": "^1.2.1",
+    "webpack": "^1.3.2-beta8",
+    "webpack-dev-server": "^1.4.7",
+    "raw-loader": "^0.5.1",
+    "reactify": "^0.17.0",
+    "uglify-js": "^2.4.15"
+  }
+}
