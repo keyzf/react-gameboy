@@ -3,6 +3,12 @@
 <head>
   <meta charset="utf-8"/>
   <title>react-gameboy</title>
+  <style>
+    .gameboy {
+      height: 288px;
+      width: 320px;
+    }
+  </style>
 </head>
 <body>
   <script src="http://fb.me/react-with-addons-0.12.1.js"></script>
@@ -10,10 +16,29 @@
   <script src="../dist/react-gameboy.js"></script>
   <script type="text/jsx">
     var App = React.createClass({
+      getInitialState: function() {
+        return {
+          romData:null
+        };
+      },
       render: function () {
         return (
-          <Gameboy romData='' opts={null}/>
+          <div>
+            <div>
+              <input type='file' ref='fileInput' onChange={this.onFile}></input>
+            </div>
+            <Gameboy romData={this.state.romData} opts={{drawEvents: true, gbBootRom: true}}/>
+          </div>
         );
+      },
+      onFile: function() {
+        var self = this;
+        var file = this.refs.fileInput.getDOMNode().files[0];
+        var reader = new FileReader();
+        reader.onload = function() {
+          self.setState({romData: this.result});
+        }
+        reader.readAsBinaryString(file);
       }
     });
 
