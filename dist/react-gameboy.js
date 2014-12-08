@@ -64,7 +64,15 @@ return /******/ (function(modules) { // webpackBootstrap
 	//var React = require('react');
 	var gameboy = __webpack_require__(2);
 	
+	// right, left, up, down, a, b, select, start
+	var keymap = [ 39, 37, 38, 40, 65, 83, 79, 13];
+	
 	var Gameboy = React.createClass({displayName: 'Gameboy',
+	  getDefaultProps: function() {
+	    return {
+	      opts: {}
+	    };
+	  },
 	  getInitialState: function() {
 	    return {
 	      running: false
@@ -87,6 +95,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  componentDidMount: function() {
 	    this.startEmulator(this.props.romData, this.props.opts);
+	    addEventListener('keydown', this.onKeyDown);
+	    addEventListener('keyup', this.onKeyUp);
 	  },
 	  componentDidUpdate: function() {
 	    var self = this;
@@ -99,6 +109,18 @@ return /******/ (function(modules) { // webpackBootstrap
 	  },
 	  componentWillReceiveProps: function(nextProps) {
 	    this.startEmulator(nextProps.romData, nextProps.opts);
+	  },
+	  onKeyDown: function(e) {
+	    var key;
+	    if (!this.state.running || (key = keymap.indexOf(e.keyCode))===-1) return;
+	
+	    this.gb.JoyPadEvent(key, true);
+	  },
+	  onKeyUp: function(e) {
+	    var key;
+	    if (!this.state.running || (key = keymap.indexOf(e.keyCode))===-1) return;
+	
+	    this.gb.JoyPadEvent(key, false);
 	  }
 	});
 	

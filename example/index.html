@@ -81,7 +81,7 @@
               <p>or choose a file: <input type='file' ref='fileInput' onChange={this.onFile}></input>
               </p>
             </div>
-            <Gameboy romData={this.state.romData} opts={{drawEvents: true, gbBootRom: true, sound:XAudioServer}} inputOnFocus={false}/>
+            <Gameboy romData={this.state.romData} opts={{drawEvents: true, gbBootRom: true, sound:XAudioServer}}/>
           </div>
         );
       },
