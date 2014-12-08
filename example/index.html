@@ -4,9 +4,35 @@
   <meta charset="utf-8"/>
   <title>react-gameboy</title>
   <style>
+    body {
+      font: normal 16px/20px "Helvetica Neue", Helvetica, sans-serif;
+    }
+    .dropzone {
+      border: 3px dashed #ccc;
+      border-radius: 10%;
+      display: inline-block;
+      padding: 10px;
+      position: relative;
+    }
+    .dropzone-dragover {
+      border-style: solid;
+    }
+    .dropzone.loaded {
+      border: transparent;
+    }
+    .loaded .info {
+      display: none;
+    }
+    .info {
+      color: #999;
+      position: absolute;
+      text-align: center;
+    }
     .gameboy {
       height: 288px;
       width: 320px;
+    }
+    .gameboy:focus {
     }
   </style>
 </head>
@@ -14,26 +40,54 @@
   <script src="http://fb.me/react-with-addons-0.12.1.js"></script>
   <script src="http://fb.me/JSXTransformer-0.12.1.js"></script>
   <script src="../dist/react-gameboy.js"></script>
+  <script src="./resampler.js"></script>
+  <script src="./xaudioserver.js"></script>
   <script type="text/jsx">
     var App = React.createClass({
       getInitialState: function() {
         return {
+          isDragActive: false,
           romData:null
         };
       },
+      onDragLeave: function(e) {
+        this.setState({
+          isDragActive: false
+        });
+      },
+      onDragOver: function(e) {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = "copy";
+
+        this.setState({
+          isDragActive: true
+        });
+      },
+      onDrop: function(e) {
+        e.preventDefault();
+
+        this.setState({
+          isDragActive: false
+        });
+
+        var file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
+        this.onFile(file);
+      },
       render: function () {
         return (
-          <div>
-            <div>
-              <input type='file' ref='fileInput' onChange={this.onFile}></input>
+          <div className={'container dropzone'+(this.state.isDragActive ? ' dropzone-dragover':'')+(this.state.romData ? ' loaded': '')} onDragLeave={this.onDragLeave} onDragOver={this.onDragOver} onDrop={this.onDrop}>
+            <div className='info'>
+              <p>Drop gameboy rom file here</p>
+              <p>or choose a file: <input type='file' ref='fileInput' onChange={this.onFile}></input>
+              </p>
             </div>
-            <Gameboy romData={this.state.romData} opts={{drawEvents: true, gbBootRom: true}}/>
+            <Gameboy romData={this.state.romData} opts={{drawEvents: true, gbBootRom: true, sound:XAudioServer}} inputOnFocus={false}/>
           </div>
         );
       },
-      onFile: function() {
+      onFile: function(file) {
         var self = this;
-        var file = this.refs.fileInput.getDOMNode().files[0];
+        var file = file || this.refs.fileInput.getDOMNode().files[0];
         var reader = new FileReader();
         reader.onload = function() {
           self.setState({romData: this.result});
