@@ -7,12 +7,12 @@ module.exports = {
     libraryTarget: 'umd'
   },
   externals: {
+    'react': 'React',
     'react/addons': 'React'
   },
   module: {
     loaders: [
-      {test: /\.js$/, loader: 'jsx-loader'},
-      {test: /\.gb/, loader: 'raw-loader'}
+      {test: /\.js$/, loader: 'jsx-loader'}
     ]
   }
 };

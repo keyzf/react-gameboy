@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
+		module.exports = factory(require("React"));
 	else if(typeof define === 'function' && define.amd)
-		define(factory);
+		define(["React"], factory);
 	else if(typeof exports === 'object')
-		exports["Gameboy"] = factory();
+		exports["Gameboy"] = factory(require("React"));
 	else
-		root["Gameboy"] = factory();
-})(this, function() {
+		root["Gameboy"] = factory(root["React"]);
+})(this, function(__WEBPACK_EXTERNAL_MODULE_2__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -61,8 +61,8 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 1 */
 /***/ function(module, exports, __webpack_require__) {
 
-	//var React = require('react');
-	var gameboy = __webpack_require__(2);
+	var React = __webpack_require__(2);
+	var gameboy = __webpack_require__(3);
 	
 	// right, left, up, down, a, b, select, start
 	var keymap = [ 39, 37, 38, 40, 65, 83, 79, 13];
@@ -133,9 +133,15 @@ return /******/ (function(modules) { // webpackBootstrap
 /* 2 */
 /***/ function(module, exports, __webpack_require__) {
 
+	module.exports = __WEBPACK_EXTERNAL_MODULE_2__;
+
+/***/ },
+/* 3 */
+/***/ function(module, exports, __webpack_require__) {
+
 	
-	var Emitter = __webpack_require__(3);
-	var debug = __webpack_require__(4)('gameboy');
+	var Emitter = __webpack_require__(4);
+	var debug = __webpack_require__(5)('gameboy');
 	
 	module.exports = GameBoyCore;
 	
@@ -9721,7 +9727,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 3 */
+/* 4 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -9729,7 +9735,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	 * Module dependencies.
 	 */
 	
-	var index = __webpack_require__(5);
+	var index = __webpack_require__(6);
 	
 	/**
 	 * Expose `Emitter`.
@@ -9889,7 +9895,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 4 */
+/* 5 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
@@ -10032,7 +10038,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 
 /***/ },
-/* 5 */
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	
