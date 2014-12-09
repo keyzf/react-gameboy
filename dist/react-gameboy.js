@@ -103,7 +103,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    (function animLoop() {
 	      if (!self.state.running) return;
 	
-	      requestAnimationFrame(animLoop);
+	      setTimeout(animLoop, 8);
 	      self.gb.run();
 	    })();
 	  },
@@ -115,12 +115,14 @@ return /******/ (function(modules) { // webpackBootstrap
 	    if (!this.state.running || (key = keymap.indexOf(e.keyCode))===-1) return;
 	
 	    this.gb.JoyPadEvent(key, true);
+	    e.preventDefault();
 	  },
 	  onKeyUp: function(e) {
 	    var key;
 	    if (!this.state.running || (key = keymap.indexOf(e.keyCode))===-1) return;
 	
 	    this.gb.JoyPadEvent(key, false);
+	    e.preventDefault();
 	  }
 	});
 	
