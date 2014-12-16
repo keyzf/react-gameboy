@@ -69,7 +69,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	var Gameboy = React.createClass({displayName: 'Gameboy',
 	  getDefaultProps: function() {
 	    return {
-	      mute: false,
 	      opts: {},
 	      running: false,
 	      speed: 1,
@@ -79,9 +78,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	
 	  getInitialState: function() {
 	    return {
-	      mute: this.props.mute,
-	      running: this.props.running,
-	      volume: this.props.volume
+	      running: this.props.running
 	    }
 	  },
 	
@@ -147,6 +144,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	    this.gb = gameboy(canvasEl, this.props.romData, this.props.opts);
 	    this.gb.stopEmulator = 1;
 	    this.gb.start();
+	    this.gb.audioHandle && this.gb.audioHandle.changeVolume(this.props.volume);
 	
 	    this.setState({running: true});
 	  },
