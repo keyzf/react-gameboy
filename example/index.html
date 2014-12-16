@@ -25,24 +25,55 @@
   <script src="./resampler.js"></script>
   <script src="./xaudioserver.js"></script>
   <script type="text/jsx">
+    var buttonMap = {
+      39: 'right',
+      37: 'left',
+      38: 'up',
+      40: 'down',
+      65: 'a',
+      83: 'b',
+      32: 'select',
+      13: 'start'
+    };
+
     var App = React.createClass({
       getInitialState: function() {
         return {
-          isDragActive: false,
+          buttons: {
+            right: false,
+            left: false,
+            up: false,
+            down: false,
+            a: false,
+            b: false,
+            select: false,
+            start: false
+          },
           romData:null
         };
       },
 
       render: function () {
+        window.app = this;
         return (
           <div>
             <h1>react-gameboy</h1>
             <div>
-              Open local rom file: <input type='file' ref='fileInput' onChange={this.onFile}></input>
+              Open local rom file: <input type='file' ref='fileInput' onChange={this.onFile}> </input>
             </div>
-            <Gameboy romData={this.state.romData} opts={{sound:XAudioServer}}/>
+            <Gameboy ref='gameboy' romData={this.state.romData} volume={.25} buttons={this.state.buttons} opts={{sound:XAudioServer}}/>
           </div>
         );
+      },
+
+      componentDidMount: function() {
+        addEventListener('keydown', this.onKey);
+        addEventListener('keyup', this.onKey);
+      },
+
+      componentWillUnmount: function() {
+        removeEventListener('keydown', this.onKey);
+        removeEventListener('keyup', this.onKey);
       },
 
       onFile: function() {
@@ -53,6 +84,15 @@
           self.setState({romData: this.result});
         }
         reader.readAsBinaryString(file);
+      },
+
+      onKey: function(e) {
+        if (Object.keys(buttonMap).indexOf(''+e.keyCode) < 0) return;
+        e.preventDefault();
+
+        var buttons = this.state.buttons;
+        buttons[buttonMap[e.keyCode]] = e.type === 'keydown';
+        this.setState({buttons: buttons});
       }
     });
 

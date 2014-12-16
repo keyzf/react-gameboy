@@ -5,8 +5,12 @@ A component to emulate and play gameboy roms. Emulator used is Grant Galitz's [G
 ## Installation
 
 ```bash
-npm i -S react-gameboy
+npm install --save react-gameboy
 ```
+
+## Demo
+
+http://cezary.github.io/react-gameboy/example
 
 ## Usage
 
@@ -26,5 +30,5 @@ var Component = React.createClass({
 ## Todo
 * Import and export save states
 * Package audio dependency (currently requires external [dependency](https://github.com/grantgalitz/XAudioJS))
-* Support Gamepad API
-* Add emulation speed control
+* ~~Support Gamepad API~~
+* ~~Add emulation speed control~~
