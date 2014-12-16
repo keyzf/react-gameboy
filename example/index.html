@@ -10,41 +10,6 @@
       margin: 0 auto;
       width: 750px;
     }
-    h1 {
-      position: absolute;
-      z-index: 1;
-    }
-    .container {
-      height: 100vh;
-      min-height: 500px;
-      -webkit-transform-style: preserve-3d;
-         -moz-transform-style: preserve-3d;
-              transform-style: preserve-3d;
-    }
-    .dropzone {
-      border: 3px dashed #ccc;
-      border-radius: 10%;
-      display: inline-block;
-      padding: 10px;
-      position: relative;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-    .dropzone-dragover {
-      border-style: solid;
-    }
-    .dropzone.loaded {
-      border: transparent;
-    }
-    .loaded .info {
-      display: none;
-    }
-    .info {
-      color: #999;
-      position: absolute;
-      text-align: center;
-    }
     .gameboy {
       height: 288px;
       width: 320px;
@@ -68,51 +33,19 @@
         };
       },
 
-      onDragLeave: function(e) {
-        this.setState({
-          isDragActive: false
-        });
-      },
-
-      onDragOver: function(e) {
-        e.preventDefault();
-        e.dataTransfer.dropEffect = "copy";
-
-        this.setState({
-          isDragActive: true
-        });
-      },
-
-      onDrop: function(e) {
-        e.preventDefault();
-
-        this.setState({
-          isDragActive: false
-        });
-
-        var file = e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
-        this.onFile(file);
-      },
-
       render: function () {
         return (
           <div>
             <h1>react-gameboy</h1>
-            <div className='container'>
-              <div className={'dropzone'+(this.state.isDragActive ? ' dropzone-dragover':'')+(this.state.romData ? ' loaded': '')} onDragLeave={this.onDragLeave} onDragOver={this.onDragOver} onDrop={this.onDrop}>
-                <div className='info'>
-                  <p>Drop gameboy rom file here</p>
-                  <p>or choose a file: <input type='file' ref='fileInput' onChange={this.onFile}></input>
-                  </p>
-                </div>
-                <Gameboy romData={this.state.romData} opts={{sound:XAudioServer}}/>
-              </div>
+            <div>
+              Open local rom file: <input type='file' ref='fileInput' onChange={this.onFile}></input>
             </div>
+            <Gameboy romData={this.state.romData} opts={{sound:XAudioServer}}/>
           </div>
         );
       },
 
-      onFile: function(file) {
+      onFile: function() {
         var self = this;
         var file = file || this.refs.fileInput.getDOMNode().files[0];
         var reader = new FileReader();
