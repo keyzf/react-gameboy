@@ -25,7 +25,7 @@
   <script src="./resampler.js"></script>
   <script src="./xaudioserver.js"></script>
   <script type="text/jsx">
-    var buttonMap = {
+    var gamepadMap = {
       39: 'right',
       37: 'left',
       38: 'up',
@@ -39,7 +39,7 @@
     var App = React.createClass({
       getInitialState: function() {
         return {
-          buttons: {
+          gamepad: {
             right: false,
             left: false,
             up: false,
@@ -61,7 +61,7 @@
             <div>
               Open local rom file: <input type='file' ref='fileInput' onChange={this.onFile}> </input>
             </div>
-            <Gameboy ref='gameboy' romData={this.state.romData} volume={.25} buttons={this.state.buttons} opts={{sound:XAudioServer}}/>
+            <Gameboy ref='gameboy' romData={this.state.romData} volume={.25} gamepad={this.state.gamepad} opts={{sound:XAudioServer}}/>
           </div>
         );
       },
@@ -87,12 +87,12 @@
       },
 
       onKey: function(e) {
-        if (Object.keys(buttonMap).indexOf(''+e.keyCode) < 0) return;
+        if (Object.keys(gamepadMap).indexOf(''+e.keyCode) < 0) return;
         e.preventDefault();
 
-        var buttons = this.state.buttons;
-        buttons[buttonMap[e.keyCode]] = e.type === 'keydown';
-        this.setState({buttons: buttons});
+        var gamepad = this.state.gamepad;
+        gamepad[gamepadMap[e.keyCode]] = e.type === 'keydown';
+        this.setState({gamepad: gamepad});
       }
     });
 
