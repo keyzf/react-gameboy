@@ -29,6 +29,6 @@ var Component = React.createClass({
 
 ## Todo
 * Import and export save states
-* Package audio dependency (currently requires external [dependency](https://github.com/grantgalitz/XAudioJS))
+* ~~Package audio dependency (currently requires external [dependency](https://github.com/grantgalitz/XAudioJS))~~
 * ~~Support Gamepad API~~
 * ~~Add emulation speed control~~

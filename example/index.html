@@ -22,8 +22,6 @@
   <script src="//fb.me/react-with-addons-0.12.1.js"></script>
   <script src="//fb.me/JSXTransformer-0.12.1.js"></script>
   <script src="../dist/react-gameboy.js"></script>
-  <script src="./resampler.js"></script>
-  <script src="./xaudioserver.js"></script>
   <script type="text/jsx">
     var gamepadMap = {
       39: 'right',
@@ -61,7 +59,7 @@
             <div>
               Open local rom file: <input type='file' ref='fileInput' onChange={this.onFile}> </input>
             </div>
-            <Gameboy ref='gameboy' romData={this.state.romData} volume={.25} gamepad={this.state.gamepad} opts={{sound:XAudioServer}}/>
+            <Gameboy ref='gameboy' romData={this.state.romData} volume={.25} gamepad={this.state.gamepad} />
           </div>
         );
       },
