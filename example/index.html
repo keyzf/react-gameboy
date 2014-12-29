@@ -10,6 +10,17 @@
       margin: 0 auto;
       width: 750px;
     }
+    dl dt {
+      float: left;
+      clear: left;
+      width: 50px;
+      text-align: right;
+      font-weight: bold;
+    }
+    dl dd {
+      margin: 0 0 0 60px;
+      padding: 0 0 .5em 0;
+    }
     .gameboy {
       height: 288px;
       width: 320px;
@@ -52,7 +63,6 @@
       },
 
       render: function () {
-        window.app = this;
         return (
           <div>
             <h1>react-gameboy</h1>
@@ -60,6 +70,27 @@
               Open local rom file: <input type='file' ref='fileInput' onChange={this.onFile}> </input>
             </div>
             <Gameboy ref='gameboy' romData={this.state.romData} volume={.25} gamepad={this.state.gamepad} />
+            <div>
+              <div>Keys:</div>
+              <dl>
+                <dt>↑</dt>
+                <dd>up</dd>
+                <dt>↓</dt>
+                <dd>down</dd>
+                <dt>←</dt>
+                <dd>left</dd>
+                <dt>→</dt>
+                <dd>a</dd>
+                <dt>a</dt>
+                <dd>s</dd>
+                <dt>b</dt>
+                <dd>right</dd>
+                <dt>enter</dt>
+                <dd>start</dd>
+                <dt>space</dt>
+                <dd>select</dd>
+              </dl>
+            </div>
           </div>
         );
       },
