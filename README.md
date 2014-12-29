@@ -10,7 +10,7 @@ npm install --save react-gameboy
 
 ## Demo
 
-http://cezary.github.io/react-gameboy/example
+http://cezary.github.io/react-gameboy/
 
 ## Usage
 
